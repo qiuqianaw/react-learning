@@ -1,26 +1,45 @@
-// 组件状态 class component
-
 import React from "react";
 
 class TestComponent extends React.Component {
-  // 1. 定义组件状态
   state = {
-    name: "qiuqianaw",
-  };
-  // 3.修改状态
-  changeName = () => {
-    this.setState({
+    count: 0,
+    list: [1, 2, 3],
+    person: {
       name: "qiuqian",
+      gender: 1,
+      age: 18,
+    },
+  };
+
+  clickHandler = () => {
+    this.setState({
+      count: this.state.count + 1,
+      list: [
+        ...this.state.list,
+        this.state.list[this.state.list.length - 1] + 1,
+      ],
+      person: {
+        ...this.state.person,
+        name: "qiuqianaw",
+      },
     });
   };
 
   render() {
     // 2.使用状态
     return (
-      <div>
-        hello, {this.state.name}
-        <button onClick={this.changeName}>change name</button>
-      </div>
+      <>
+        <ul>
+          {this.state.list.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <div>{this.state.person.name}</div>
+        <div>
+          {this.state.count}
+          <button onClick={this.clickHandler}>changeState</button>
+        </div>
+      </>
     );
   }
 }
