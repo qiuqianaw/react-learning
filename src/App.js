@@ -14,10 +14,7 @@ class TestComponent extends React.Component {
   clickHandler = () => {
     this.setState({
       count: this.state.count + 1,
-      list: [
-        ...this.state.list,
-        this.state.list[this.state.list.length - 1] + 1,
-      ],
+      list: this.state.list.filter((item) => item !== 2),
       person: {
         ...this.state.person,
         name: "qiuqianaw",
