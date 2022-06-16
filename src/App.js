@@ -3,10 +3,18 @@ import "./App.css";
 
 // 函数组件
 function HelloFunctionComponent() {
-  const clickHandler = () => {
-    console.log("函数组件中的事件被触发");
+  const clickHandler = (e) => {
+    // 阻止默认行为
+    e.preventDefault();
+    console.log("函数组件中的事件被触发", e);
   };
-  return <h1 onClick={clickHandler}>hello</h1>;
+  return (
+    <div>
+      <a onClick={clickHandler} href="https://qiuqian.xyz">
+        https://qiuqian.xyz
+      </a>
+    </div>
+  );
 }
 
 // 类组件
