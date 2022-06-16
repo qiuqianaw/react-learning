@@ -3,16 +3,15 @@ import "./App.css";
 
 // 函数组件
 function HelloFunctionComponent() {
-  const clickHandler = (e) => {
+  const clickHandler = (e, msg) => {
     // 阻止默认行为
     e.preventDefault();
-    console.log("函数组件中的事件被触发", e);
+    console.log(e);
+    console.log(msg);
   };
   return (
     <div>
-      <a onClick={clickHandler} href="https://qiuqian.xyz">
-        https://qiuqian.xyz
-      </a>
+      <div onClick={(e) => clickHandler(e, "there is a message")}>click me</div>
     </div>
   );
 }
