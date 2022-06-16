@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+// 函数组件
+function HelloFunctionComponent() {
+  const clickHandler = () => {
+    console.log("函数组件中的事件被触发");
+  };
+  return <h1 onClick={clickHandler}>hello</h1>;
+}
+
+// 类组件
+// 回调函数this指向当前组件实例对象
+class HelloClassComponent extends React.Component {
+  clickHandler = () => {
+    console.log("类组件中的事件被触发");
+  };
+  render() {
+    return <div onClick={this.clickHandler}>this is a class Component</div>;
+  }
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <HelloFunctionComponent />
+        <HelloClassComponent />
+      </div>
+    </>
   );
 }
 
