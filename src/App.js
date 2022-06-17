@@ -1,26 +1,16 @@
-import React from "react";
-// 受控组件
-class InputComponent extends React.Component {
-  // 1. 声明控制input value的react组件自己的状态
-  state = {
-    message: "this is msg",
-  };
-  inputChange = (e) => {
-    console.log("change event active", e);
-    this.setState({
-      message: e.target.value,
-    });
+import React, { createRef } from "react";
+// 非受控组件
+// 通过手动操作dom的方式获取文本框值，文本框状态不再受state控制，通过原生dom获取输入框的值
+class Input extends React.Component {
+  msgRef = createRef();
+  getValue = () => {
+    console.log(this.msgRef.current.value);
   };
   render() {
     return (
-      // 2. 绑定value
-      // 3. 绑定数据
       <>
-        <input
-          type="text"
-          value={this.state.message}
-          onChange={this.inputChange}
-        />
+        <input type="text" ref={this.msgRef} />
+        <button onClick={this.getValue}>点击获取输入框的值</button>
       </>
     );
   }
@@ -29,7 +19,7 @@ class InputComponent extends React.Component {
 function App() {
   return (
     <div>
-      <InputComponent />
+      <Input />
     </div>
   );
 }
