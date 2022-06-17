@@ -1,41 +1,26 @@
 import React from "react";
-
-class TestComponent extends React.Component {
+// 受控组件
+class InputComponent extends React.Component {
+  // 1. 声明控制input value的react组件自己的状态
   state = {
-    count: 0,
-    list: [1, 2, 3],
-    person: {
-      name: "qiuqian",
-      gender: 1,
-      age: 18,
-    },
+    message: "this is msg",
   };
-
-  clickHandler = () => {
+  inputChange = (e) => {
+    console.log("change event active", e);
     this.setState({
-      count: this.state.count + 1,
-      list: this.state.list.filter((item) => item !== 2),
-      person: {
-        ...this.state.person,
-        name: "qiuqianaw",
-      },
+      message: e.target.value,
     });
   };
-
   render() {
-    // 2.使用状态
     return (
+      // 2. 绑定value
+      // 3. 绑定数据
       <>
-        <ul>
-          {this.state.list.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <div>{this.state.person.name}</div>
-        <div>
-          {this.state.count}
-          <button onClick={this.clickHandler}>changeState</button>
-        </div>
+        <input
+          type="text"
+          value={this.state.message}
+          onChange={this.inputChange}
+        />
       </>
     );
   }
@@ -44,7 +29,7 @@ class TestComponent extends React.Component {
 function App() {
   return (
     <div>
-      <TestComponent />
+      <InputComponent />
     </div>
   );
 }
