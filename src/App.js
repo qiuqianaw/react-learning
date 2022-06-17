@@ -1,35 +1,42 @@
-import React from "react";
-// 兄弟组件通信: 通过状态提升机制，利用共同的父组件实现兄弟通信, B component -> A component
+import React, { createContext } from "react";
+// Context 无需通过中间层，上层组件可以直接传递数据给下层组件(相对上下，但通常都通过App作为数据的提供方)
+const { Provider, Consumer } = createContext();
 
-function SonA(props) {
-  return <div>this is A, {props.message}</div>;
-}
+// App -> A -> C
+// App -> C
 
-function SonB(props) {
-  const bMsg = "data in B";
+function ComponentA() {
   return (
     <div>
-      this is B<button onClick={() => props.getBMsg(bMsg)}>发送数据</button>
+      this is ComponentA
+      <ComponentC />
+    </div>
+  );
+}
+
+function ComponentC() {
+  return (
+    <div>
+      this is ComponentC, 
+      {/*  通过Consumer使用 */}
+      <Consumer>{(value) => <span>{value}</span>}</Consumer>
     </div>
   );
 }
 
 class App extends React.Component {
   state = {
-    message: ""
+    message: "this is message",
   };
-  getBMsg = (msg) => {
-    console.log(msg);
-    this.setState({
-      message: msg
-    })
-  };
+
   render() {
     return (
-      <>
-        <SonA message={this.state.message} />
-        <SonB getBMsg={this.getBMsg} />
-      </>
+      // 使用Provider包裹根组件
+      <Provider value={this.state.message}>
+        <div>
+          <ComponentA />
+        </div>
+      </Provider>
     );
   }
 }
