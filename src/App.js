@@ -1,23 +1,46 @@
 import React from "react";
 
 // 函数式 son component
-function SonFunction(props) {
+// function SonFunction(props) {
+//   // props对象存的是通过父组件传入的所有数据
+//   // 解构赋值
+//   const { list, userInfo, getMsg, child, msg } = props;
+//   return (
+//     <>
+//       <div>函数子组件, {msg}</div>
+//       <div>
+//         <ul>
+//           {list.map((item) => (
+//             <li key={item}>{item}</li>
+//           ))}
+//         </ul>
+//       </div>
+//       <div>{userInfo.name}</div>
+//       <div>
+//         <button onClick={getMsg}>触发父组件传入的函数</button>
+//       </div>
+//       <div>{child}</div>
+//     </>
+//   );
+// }
+function SonFunction({ list, userInfo, getMsg, child, msg }) {
+  // 传参时解构赋值
   // props对象存的是通过父组件传入的所有数据
   return (
     <>
-      <div>函数子组件, {props.msg}</div>
+      <div>函数子组件, {msg}</div>
       <div>
         <ul>
-          {props.list.map((item) => (
+          {list.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
       </div>
-      <div>{props.userInfo.name}</div>
+      <div>{userInfo.name}</div>
       <div>
-        <button onClick={props.getMsg}>触发父组件传入的函数</button>
+        <button onClick={getMsg}>触发父组件传入的函数</button>
       </div>
-      <div>{props.child}</div>
+      <div>{child}</div>
     </>
   );
 }
