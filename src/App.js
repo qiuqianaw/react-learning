@@ -1,38 +1,34 @@
 import React from "react";
+// 兄弟组件通信: 通过状态提升机制，利用共同的父组件实现兄弟通信, B component -> A component
 
-// 子传父: 子组件调用父组件传递过来的函数，把想要传递的数据作为实参
-function Son(props) {
-  const { getSonMsg } = props;
-  const message = "son component msg";
-  function clickHandler() {
-    getSonMsg(message);
-  }
+function SonA(props) {
+  return <div>this is A, {props.message}</div>;
+}
+
+function SonB(props) {
+  const bMsg = "data in B";
   return (
-    <>
-      <div>
-        this is son
-        <button onClick={clickHandler}>button</button>
-      </div>
-    </>
+    <div>
+      this is B<button onClick={() => props.getBMsg(bMsg)}>发送数据</button>
+    </div>
   );
 }
 
-// parent component
 class App extends React.Component {
   state = {
-    list: [1, 2, 3],
+    message: ""
   };
-
-  // 准备一个函数接收子组件的数据
-  getSonMsg = (sonMsg) => {
-    console.log("msg from son component: ", sonMsg);
+  getBMsg = (msg) => {
+    console.log(msg);
+    this.setState({
+      message: msg
+    })
   };
   render() {
     return (
       <>
-        <div>
-          <Son getSonMsg={this.getSonMsg} />
-        </div>
+        <SonA message={this.state.message} />
+        <SonB getBMsg={this.getBMsg} />
       </>
     );
   }
