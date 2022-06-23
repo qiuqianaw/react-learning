@@ -1,16 +1,21 @@
 import React from "react";
-// 函数组件默认值
 
-function Test({ pageSize = 10 }) {
-  return (
-    <>
-      <div>this is pageSize: {pageSize}</div>
-    </>
-  );
+class Test extends React.Component {
+  static defaultProps = {
+    pageSize: 10
+  }
+  render() {
+    return (
+      <>
+      <div>this is pageSize: {this.props.pageSize}</div>
+      </>
+    )
+  }
 }
 // Test.defaultProps = {
-//   pageSize: 10,
-// };
+//   pageSize: 10
+// }
+
 
 class App extends React.Component {
   state = {};
