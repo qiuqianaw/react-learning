@@ -1,21 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
+// 函数组件默认值
 
-function Test({ list }) {
+function Test({ pageSize = 10 }) {
   return (
     <>
-      <div>
-        {list.map((item) => (
-          <p>{item}</p>
-        ))}
-      </div>
+      <div>this is pageSize: {pageSize}</div>
     </>
   );
 }
-Test.propTypes = {
-  // 定义校验规则
-  list: PropTypes.array.isRequired,
-};
+// Test.defaultProps = {
+//   pageSize: 10,
+// };
 
 class App extends React.Component {
   state = {};
@@ -23,7 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Test list={[1, 2, 3, 4, 5]} />
+        <Test pageSize={20} />
       </div>
     );
   }
