@@ -1,29 +1,28 @@
 import React from "react";
 
-class Test extends React.Component {
-  static defaultProps = {
-    pageSize: 10
-  }
-  render() {
-    return (
-      <>
-      <div>this is pageSize: {this.props.pageSize}</div>
-      </>
-    )
-  }
-}
-// Test.defaultProps = {
-//   pageSize: 10
-// }
-
-
+// 生命周期 类组件需要被实例化，才有生命周期
+// constructor => render(渲染ui) => componentDidMount(操作DOM，副作用)
 class App extends React.Component {
-  state = {};
-
+  constructor() {
+    super();
+    console.log("constructor");
+  }
+  state = {
+    count: 0,
+  };
+  clickHandler = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+  componentDidMount() {
+    console.log("componentDidMount");
+  }
   render() {
+    console.log("render");
+
     return (
       <div>
-        <Test pageSize={20} />
+        this is div
+        <button onClick={this.clickHandler}>{this.state.count}</button>
       </div>
     );
   }
