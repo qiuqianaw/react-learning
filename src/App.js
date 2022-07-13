@@ -7,7 +7,6 @@ const { Search } = Input;
 
 class App extends React.Component {
   state = {
-    list: [],
     colunms: [
       {
         title: "任务编号",
@@ -26,16 +25,31 @@ class App extends React.Component {
       },
       {
         title: "操作",
-        dataIndex: "operate",
-        key: "operate",
-        render: (_, record) => {
+        render: (_, record) => (
           <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => this.deleteHandler(record)}
+            title="sure to delete?"
+            onConfirm={() => this.deleteHandler(_, record)}
           >
             <Button>Delete</Button>
-          </Popconfirm>;
-        },
+          </Popconfirm>
+        ),
+      },
+    ],
+    list: [
+      {
+        id: "1",
+        name: "hello",
+        des: "hello, world",
+      },
+      {
+        id: "2",
+        name: "Golang",
+        des: "Golang yyds",
+      },
+      {
+        id: "3",
+        name: "TypeScript",
+        des: "TypeScript yyds",
       },
     ],
   };
@@ -44,7 +58,12 @@ class App extends React.Component {
     console.log(value);
   };
   // 删除
-  deleteHandler = (record) => {};
+  deleteHandler = (_, record) => {
+    console.log("delete", _, record);
+    this.setState({
+      list: this.state.list.filter((item) => item.id !== record.id),
+    });
+  };
 
   // 加载列表
   loadList = async () => {
@@ -72,7 +91,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.loadList();
+    // this.loadList();
   }
 
   render() {
