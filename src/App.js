@@ -1,14 +1,22 @@
-import { useLocalStorage } from "./hooks/useLocalStorage";
-// 1. message 通过自定义传入默认初始值
-// 2. 每次修改message数据时，自动往本地同步
+import { Button } from "antd";
+import { useState } from "react";
+
+// 由传入控制初始值
+function Counter(props) {
+  const [count, setCount] = useState(() => {
+    // 初始值经过计算return
+    return props.count;
+  });
+  return <Button onClick={() => setCount(count + 1)}>{count}</Button>;
+}
+
 function App() {
-  const [message, setMessage] = useLocalStorage("hook-key", "qiuqian");
-  setTimeout(() => {
-    setMessage("aw");
-  }, 5000);
   return (
     <>
-      <div>{message}</div>
+      <div>
+        <Counter count={10} />
+        <Counter count={20} />
+      </div>
     </>
   );
 }
