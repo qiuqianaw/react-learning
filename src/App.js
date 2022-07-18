@@ -1,21 +1,25 @@
 import { Button } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-// 由传入控制初始值
-function Counter(props) {
-  const [count, setCount] = useState(() => {
-    // 初始值经过计算return
-    return props.count;
-  });
-  return <Button onClick={() => setCount(count + 1)}>{count}</Button>;
+function Test() {
+  useEffect(() => {
+    let timer = setInterval(() => {
+      console.log("定时器执行了");
+    }, 1000);
+    return () => {
+      // 清理
+      clearInterval(timer);
+    };
+  }, []);
+  return <div>This is Test</div>;
 }
-
 function App() {
+  const [flag, setFlag] = useState(true);
   return (
     <>
       <div>
-        <Counter count={10} />
-        <Counter count={20} />
+        {flag ? <Test /> : null}
+        <Button onClick={() => setFlag(!flag)}>switch</Button>
       </div>
     </>
   );
