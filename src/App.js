@@ -1,7 +1,7 @@
 import { Button } from "antd";
-import { useState, useContext, createContext } from "react";
+import { useState, useContext } from "react";
+import Context from "./context";
 
-const Context = createContext();
 function ComA() {
   const count = useContext(Context);
   return (
