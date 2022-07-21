@@ -1,26 +1,38 @@
-// 类组件 发送网络请求
-// 生命周期 狗子函数 componentDidMount
-// 执行时机： 在初始化时DOM渲染完毕后执行一次
+// 组件实例 类组件
+// DOM对象 标签
 
+import React from "react";
 import { useEffect } from "react";
+import { useRef } from "react";
 
-// useEffect
-// 1. 不加依赖项： 初始化，重新渲染
-// 2. []： 只会在初始化执行一次
-// 3. 特定依赖项[count, name]： 首次执行，任意一个数值变化执行
+class TestC extends React.Component {
+  state = {
+    name: "test name",
+  };
+  getName = () => {
+    return "This is chile TestC";
+  };
+  render() {
+    return <div>I'm class Component</div>;
+  }
+}
 
 function App() {
+  const testRef = useRef(null);
+  const h1Ref = useRef(null);
+
   useEffect(() => {
-    function loadDate() {
-      fetch("http://geek.itheima.net/v1_0/channels")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    }
-    loadDate();
+    console.log(testRef.current);
+    console.log(h1Ref.current);
   }, []);
+  // useEffect回调在DOM渲染之后执行
+  // 和Vue里的watch效果类似，执行时机不同
   return (
     <>
-      <div></div>
+      <div>
+        <TestC ref={testRef} />
+        <h1 ref={h1Ref}>This is h1</h1>
+      </div>
     </>
   );
 }
