@@ -1,5 +1,6 @@
 import Home from "./Home";
 import About from "./About";
+import Login from "./Login";
 
 // 路由配置
 import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
@@ -16,6 +17,7 @@ function App() {
         {/* 指定路径和组件的对应关系 */}
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/Login" element={<Login />}></Route>
       </Routes>
     </BrowserRouter>
   );
