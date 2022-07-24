@@ -1,15 +1,9 @@
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function About() {
-  const [params] = useSearchParams();
-  const id = params.get("id");
-  const name = params.get("name");
+  const params = useParams();
 
-  return (
-    <div>
-      about -&gt; {id}-{name}
-    </div>
-  );
+  return <div>about -&gt; {params.id}</div>;
 }
 
 export default About;

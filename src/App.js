@@ -16,7 +16,7 @@ function App() {
       <Routes>
         {/* 指定路径和组件的对应关系 */}
         <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
+        <Route path="/about/:id" element={<About />}></Route>
         <Route path="/Login" element={<Login />}></Route>
       </Routes>
     </BrowserRouter>

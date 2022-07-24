@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
   function gotoAbout() {
-    navigate("/about?id=1001&name=qiuqian", { replace: true });
+    navigate("/about/1001", { replace: true });
   }
   return (
     <div>
