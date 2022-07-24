@@ -1,42 +1,19 @@
-import { Button } from "antd";
-import { useState, useContext } from "react";
-import Context from "./context";
+import Home from "./Home";
+import About from "./About";
 
-function ComA() {
-  const count = useContext(Context);
-  return (
-    <>
-      <div>
-        thid id ComA
-        <br /> app传来的数据: {count}
-      </div>
-      <ComC />
-    </>
-  );
-}
-
-function ComC() {
-  const count = useContext(Context);
-  return (
-    <div>
-      thid id ComC
-      <br />
-      comA传来的数据: {count}
-    </div>
-  );
-}
+// 路由配置
+import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(15);
   return (
-    <>
-      <Context.Provider value={count}>
-        <div>
-          <ComA />
-          <Button onClick={() => setCount(count + 1)}>click me</Button>
-        </div>
-      </Context.Provider>
-    </>
+    <BrowserRouter>
+      <Link to="/">首页</Link>
+      <Link to="/about">关于</Link>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/about" element={<About />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
